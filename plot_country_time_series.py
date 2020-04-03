@@ -23,7 +23,6 @@ parser.add_argument('--new',
                     help='If True, plot only new cases. '
                     'default: False')
 args = parser.parse_args()
-cr_key = args.country
 
 # find the time_series csv file
 ts_path = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
@@ -32,7 +31,7 @@ ts_filepath = os.path.join(ts_path, ts_filename)
 
 # build dataframe
 ts = pd.read_csv(ts_filepath)
-line_country = ts[(ts['Country/Region'] == cr_key)]
+line_country = ts[(ts['Country/Region'] == args.country)]
 ts_country = line_country.drop(['Province/State',
                                 'Country/Region',
                                 'Lat', 'Long'], axis=1)
@@ -40,7 +39,7 @@ ts_country = line_country.drop(['Province/State',
 try:
     np_line = ts_country.values[0]
 except IndexError:
-    print("The specified country '" + cr_key + "' was not found!")
+    print("The specified country '" + args.country + "' was not found!")
     quit()
 
 # build dataframes for plotting
