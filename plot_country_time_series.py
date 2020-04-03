@@ -16,12 +16,14 @@ parser.add_argument('--log',
                     default=False,
                     help='Flag to determine whether or not to plot logarithmic.')
 args = parser.parse_args()
-
 cr_key = args.country
+
+# find the time_series csv file
 ts_path = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 ts_filename = 'time_series_covid19_confirmed_global.csv'
 ts_filepath = os.path.join(ts_path, ts_filename)
 
+# build dataframe
 ts = pd.read_csv(ts_filepath)
 line_country = ts[ (ts['Country/Region'] == cr_key) ]
 ts_country = line_country.drop(['Province/State',
@@ -29,6 +31,7 @@ ts_country = line_country.drop(['Province/State',
                                 'Lat', 'Long'], axis=1)
 np_ts_country = ts_country.values
 try:
+    # plot dataframe
     ts_df = pd.DataFrame({'confirmed cases': ts_country.values[0],
                           'dates': ts_country.columns})
     lineplot = ts_df.plot.line(x='dates', y='confirmed cases', logy=args.log)
