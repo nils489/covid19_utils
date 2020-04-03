@@ -28,4 +28,4 @@ try:
     plt.plot(np_ts_germany[0])
     plt.show()
 except IndexError as e:
-    print(e)
+    print("The specified country '" +cr_key+ "' was not found!")
