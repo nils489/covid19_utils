@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from data_preprocessing import load_data
+from data_preprocessing import load_time_series_data
 
 # parse arguments
 parser = argparse.ArgumentParser(
@@ -23,7 +23,7 @@ parser.add_argument('--new',
 args = parser.parse_args()
 
 # build dataframe
-ts = load_data()
+ts = load_time_series_data()
 line_country = ts[(ts['Country/Region'] == args.country)]
 ts_country = line_country.drop(['Province/State',
                                 'Country/Region',

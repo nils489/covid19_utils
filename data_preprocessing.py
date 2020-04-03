@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 
-def load_data():
+def load_time_series_data():
     # find the time_series csv file
     ts_path = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
     ts_filename = 'time_series_covid19_confirmed_global.csv'
