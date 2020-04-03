@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-import os
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+
+from data_preprocessing import load_data
 
 # parse arguments
 parser = argparse.ArgumentParser(
@@ -21,13 +22,8 @@ parser.add_argument('--new',
                     help='Plot only new cases.')
 args = parser.parse_args()
 
-# find the time_series csv file
-ts_path = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
-ts_filename = 'time_series_covid19_confirmed_global.csv'
-ts_filepath = os.path.join(ts_path, ts_filename)
-
 # build dataframe
-ts = pd.read_csv(ts_filepath)
+ts = load_data()
 line_country = ts[(ts['Country/Region'] == args.country)]
 ts_country = line_country.drop(['Province/State',
                                 'Country/Region',
