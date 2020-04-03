@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 
 
@@ -16,3 +17,11 @@ def get_country_time_series_line(country, time_series_data_frame):
     return country_line.drop(['Province/State',
                               'Country/Region',
                               'Lat', 'Long'], axis=1)
+
+
+def get_new_cases(time_series_array):
+    # dataframe with new cases
+    ts_new_list = [0]
+    for ind in range(1, time_series_array.shape[0]):
+        ts_new_list.append(time_series_array[ind] - time_series_array[ind-1])
+    return np.array(ts_new_list)

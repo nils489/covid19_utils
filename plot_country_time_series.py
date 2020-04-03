@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 
 import argparse
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from data_preprocessing import load_time_series_data, \
-                               get_country_time_series_line
+import data_preprocessing as dp
 
 # parse arguments
 parser = argparse.ArgumentParser(
@@ -24,8 +22,8 @@ parser.add_argument('--new',
 args = parser.parse_args()
 
 # build dataframe
-ts = load_time_series_data()
-ts_line = get_country_time_series_line(args.country, ts)
+ts = dp.load_time_series_data()
+ts_line = dp.get_country_time_series_line(args.country, ts)
 
 try:
     np_line = ts_line.values[0]
@@ -36,11 +34,7 @@ except IndexError:
 # build dataframes for plotting
 ts_df = pd.DataFrame({'confirmed cases': np_line,
                       'dates': ts_line.columns})
-# dataframe with new cases
-ts_new_list = [0]
-for ind in range(1, np_line.shape[0]):
-    ts_new_list.append(np_line[ind] - np_line[ind-1])
-ts_new_array = np.array(ts_new_list)
+ts_new_array = dp.get_new_cases(np_line)
 ts_new_df = pd.DataFrame({'new cases': ts_new_array,
                           'dates': ts_line.columns})
 if args.new:
