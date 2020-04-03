@@ -4,8 +4,11 @@ covid19_utils is a collection of some utility scripts to visualize the spread of
 ## Installation
 Before running the covid19_utils, make sure, you have git installed.
 Additionally you'll need the following python packages:
+
 numpy
+
 matplotlib
+
 pandas
 
 After the installation of the dependencies make sure, you're in the covid19_utils directory and run:
