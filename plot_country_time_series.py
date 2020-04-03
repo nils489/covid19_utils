@@ -13,15 +13,12 @@ parser.add_argument('country',
                     type=str,
                     help='Name of country/region to plot data of')
 parser.add_argument('--log',
-                    type=bool,
-                    default=False,
-                    help='Flag to determine whether or not to '
-                    'plot logarithmic.')
+                    action='store_true',
+                    help='Plot with logarithmic y-axis.')
 parser.add_argument('--new',
-                    type=bool,
+                    action='store_true',
                     default=False,
-                    help='If True, plot only new cases. '
-                    'default: False')
+                    help='Plot only new cases.')
 args = parser.parse_args()
 
 # find the time_series csv file
