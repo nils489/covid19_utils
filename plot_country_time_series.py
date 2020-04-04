@@ -15,10 +15,13 @@ parser.add_argument('country',
 parser.add_argument('--log',
                     action='store_true',
                     help='Plot with logarithmic y-axis.')
-parser.add_argument('--new',
+plot_group = parser.add_mutually_exclusive_group()
+plot_group.add_argument('--new',
                     action='store_true',
-                    default=False,
                     help='Plot only new cases.')
+plot_group.add_argument('--factor',
+                    action='store_true',
+                    help='Plot new cases v accumulated cases.')
 args = parser.parse_args()
 
 # build dataframe
