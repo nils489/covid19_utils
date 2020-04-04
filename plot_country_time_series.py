@@ -14,7 +14,7 @@ parser.add_argument('country',
                     help='Name of country/region to plot data of')
 parser.add_argument('--log',
                     action='store_true',
-                    help='Plot with logarithmic y-axis.')
+                    help='Plot with logarithmic number of cases.')
 plot_group = parser.add_mutually_exclusive_group()
 plot_group.add_argument('--new',
                     action='store_true',
@@ -42,6 +42,11 @@ ts_new_df = pd.DataFrame({'new cases': ts_new_array,
                           'dates': ts_line.columns})
 if args.new:
     lineplot = ts_new_df.plot.line(x='dates', y='new cases', logy=args.log)
+elif args.factor:
+    lineplot = plt.plot(ts_df['confirmed cases'], ts_new_df['new cases'])
+    if args.log:
+        plt.yscale('log')
+        plt.xscale('log')
 else:
     lineplot = ts_df.plot.line(x='dates', y='confirmed cases', logy=args.log)
 plt.show()
