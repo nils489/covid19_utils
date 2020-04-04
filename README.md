@@ -34,7 +34,7 @@ python plot_country_time_series.py -h
 ```
 This will provide you with this nicely formatted help message:
 ```
-usage: plot_country_time_series.py [-h] [--log] [--new] country
+usage: plot_country_time_series.py [-h] [--log] [--new | --factor] country
 
 Plot COVID-19 data for a country.
 
@@ -43,6 +43,7 @@ positional arguments:
 
 optional arguments:
   -h, --help  show this help message and exit
-  --log       Plot with logarithmic y-axis.
+  --log       Plot with logarithmic number of cases.
   --new       Plot only new cases.
+  --factor    Plot new cases v accumulated cases.
   ```
